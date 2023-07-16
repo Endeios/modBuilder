@@ -19,3 +19,4 @@ dependencies=[
 ]
 [project.scripts]
 mod_builder = "mod_builder.app:main"
+mod_builder_gui = "mod_builder.mod_builder_gui:main"

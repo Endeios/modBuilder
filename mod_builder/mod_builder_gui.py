@@ -67,6 +67,11 @@ def run(password, callback):
     callback()
 
 
+def main():
+    app = MainGUI()
+    app.mainloop()
+
+
 if __name__ == "__main__":
     app = MainGUI()
     app.mainloop()
