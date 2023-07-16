@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+# requires-python = ">=3.8" # not sure yet
+
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["git_sync*"]  # package names should match these glob patterns (["*"] by default)
+exclude = ["tests*"]  # exclude packages matching these glob patterns (empty by default)
+namespaces = false
+
+[project]
+name = "mod_builder"
+version = "0.0.1"
+readme = "readme.md"
+# My dependencies
+dependencies=[
+    "pyaml",
+]
+[project.scripts]
+mod_builder = "mod_builder.app:main"

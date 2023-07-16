@@ -1,0 +1,7 @@
+mod_folder: "/home/bruno/git/rtl8852be/"
+mod_commands:
+  - make clean
+  - make -j8
+mod_install_commands:
+  - sudo -S make install
+  - sudo -S modprobe 8852be

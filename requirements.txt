@@ -1,0 +1,5 @@
+pyaml
+setuptools
+setuptools-scm
+build
+pyinstaller
