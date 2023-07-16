@@ -13,7 +13,7 @@ She has https://github.com/HRex39/rtl8852be
 
 ## Create virtual environment
 
-Create virtualenev
+Create virtualenv
 
 ```bash
 virtualenv venv
@@ -33,6 +33,16 @@ python -m build
 ```
 2. pynstaller
 
+Cli
 ```bash
 pyinstaller --onefile mod_builder/app.py
 ```
+
+G
+
+```bash
+pyinstaller --onefile mod_builder/mod_builder_gui.py
+```
+
+## Links
+- https://stackoverflow.com/questions/68198575/how-can-i-displaymy-console-output-in-tkinter

@@ -47,8 +47,17 @@ def execute_command(command):
 def execute_input_command(command):
     print("Password:")
     data = input()
-    #command = command % data
-    logging.debug("Executing: "+command + ", Setting password "+data)
+    # command = command % data
+    logging.debug("Executing: " + command + ", Setting password " + data)
+    with subprocess.Popen([command], shell=True, stderr=subprocess.STDOUT,
+                          stdout=subprocess.PIPE, stdin=subprocess.PIPE, universal_newlines=True) as proc:
+        out_err = proc.communicate(input=data)
+        for line in out_err:
+            logging.info(line)
+
+
+def execute_input_command(command, data):
+    logging.debug("Executing: " + command + ", Setting password " + data)
     with subprocess.Popen([command], shell=True, stderr=subprocess.STDOUT,
                           stdout=subprocess.PIPE, stdin=subprocess.PIPE, universal_newlines=True) as proc:
         out_err = proc.communicate(input=data)
@@ -62,12 +71,27 @@ def log_subprocess_output(pipe):
 
 
 def install(config):
-    """returns true if the install succeeds"""
+    """returns true if the installation succeeds"""
     try:
         old_wd = os.getcwd()
         os.chdir(config["mod_folder"])
         for command in config["mod_install_commands"]:
             execute_input_command(command)
+        os.chdir(old_wd)
+        return True
+    except Exception as error:
+        logging.error("Could not finish install!")
+        logging.error(error)
+        return False
+
+
+def install_password(config, password):
+    """returns true if the installation succeeds"""
+    try:
+        old_wd = os.getcwd()
+        os.chdir(config["mod_folder"])
+        for command in config["mod_install_commands"]:
+            execute_input_command(command, password)
         os.chdir(old_wd)
         return True
     except Exception as error:
