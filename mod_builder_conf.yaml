@@ -1,0 +1,7 @@
+mod_folder: "/home/lidia/rtl8852be/"
+mod_commands:
+  - make clean
+  - ls -la
+mod_install_commands:
+  - sudo -S echo "make install"
+  - sudo -S echo "modprobe 8852be"
