@@ -6,6 +6,12 @@ something that one can just click after kernel update.
 
 She has https://github.com/HRex39/rtl8852be
 
+## How to use
+Prepare the single executable, prepare the instructions for
+building the module, give them to your user, have them set
+the password, and run the app.
+![Screenshoot](docs/Screenshot.png)
+
 ## Prerequisites
 
 - all the needed building software is installed
@@ -31,7 +37,7 @@ pip install -r requirements.txt
 ```bash
 python -m build
 ```
-2. pynstaller
+2. pyinstaller
 
 Cli
 ```bash
@@ -46,3 +52,4 @@ pyinstaller --onefile mod_builder/mod_builder_gui.py
 
 ## Links
 - https://stackoverflow.com/questions/68198575/how-can-i-displaymy-console-output-in-tkinter
+- https://tkdocs.com/

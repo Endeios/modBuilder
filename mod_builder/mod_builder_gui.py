@@ -2,9 +2,9 @@ import logging
 import os.path
 import sys
 from threading import Thread
-from tkinter import Tk, Button, Frame, StringVar, DISABLED, ACTIVE
+from tkinter import Tk, StringVar, DISABLED, ACTIVE, N, S, W, E
 from tkinter.scrolledtext import ScrolledText
-from tkinter.ttk import Entry, Label
+from tkinter.ttk import Entry, Label, Button, Frame
 
 from mod_builder import builder
 
@@ -30,20 +30,37 @@ class MainGUI(Tk):
 
     def __init__(self):
         Tk.__init__(self)
-        self.root = Frame(self)
-        self.geometry("600x600")
-        self.title("Build and install a kernel module")
-        self.log_widget = ScrolledText(self.root, height=40, width=120, font=("consolas", "8", "normal"))
-        self.root.pack()
-        self.redirect_logging()
-        self.execute_build_button = Button(self.root, text="Execute Build", command=self.run_build)
+        self.root = Frame(self, padding=(3, 3, 12, 12))
         self.password = StringVar()
-        self.password_label = Label(self.root, text="Password")
-        self.password_entry = Entry(self.root, width=7, textvariable=self.password)
-        self.password_label.pack()
-        self.password_entry.pack()
-        self.execute_build_button.pack()
-        self.log_widget.pack()
+        self.upper_panel = Frame(self.root, padding=(3, 3, 12, 12))
+        self.title("Build and install a kernel module")
+        self.log_widget = ScrolledText(self.root, height=20, width=80, font=("consolas", "8", "normal"))
+        self.execute_build_button = Button(self.upper_panel, text="Execute Build", command=self.run_build)
+        self.password_label = Label(self.upper_panel, text="Password", padding=(3, 3, 3, 3))
+        self.password_entry = Entry(self.upper_panel, width=7, textvariable=self.password)
+        self.redirect_logging()
+
+        self.upper_panel.grid(column=0, row=0, rowspan=1)
+        self.log_widget.grid(column=0, row=1, rowspan=3, sticky=N+S+E+W)
+        self.root.grid(column=0, row=0, sticky=N+S+E+W)
+        self.password_label.grid(column=0, row=0, sticky=N+E+W+S)
+        self.password_entry.grid(column=1, row=0, columnspan=3, sticky=N+E+W, padx=10)
+        self.execute_build_button.grid(column=0, row=1, columnspan=4, rowspan=2, sticky=N+S+E+W)
+
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+        self.wm_minsize(300, 500)
+        self.root.columnconfigure(0, weight=1, minsize=300)
+        self.root.rowconfigure(0, weight=1, minsize=100)
+        self.root.rowconfigure(1, weight=4, minsize=400)
+        self.upper_panel.rowconfigure(0, weight=1)
+        self.upper_panel.rowconfigure(1, weight=1)
+        self.upper_panel.columnconfigure(0, weight=1)
+        self.upper_panel.columnconfigure(1, weight=1)
+        self.upper_panel.columnconfigure(2, weight=1)
+
+
+
 
     def redirect_logging(self):
         logger = PrintLogger(self.log_widget)
